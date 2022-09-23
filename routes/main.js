@@ -1,9 +1,9 @@
 const express = require('express')
-const Router = express.Router()
-
+const router = express.Router()
+const authMiddleware = require('../middleware/auth')
 const { login, dashboard } = require('../controllers/main')
 
-Router.route('/login').post(login)
-Router.route('/dashboard').get(dashboard)
+router.route('/dashboard').get(authMiddleware, dashboard)
+router.route('/login').post(login)
 
-module.exports = Router
+module.exports = router
